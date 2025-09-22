@@ -52,4 +52,27 @@ const createFeedback = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-module.exports =  {deleteFeedback,createFeedback,updateFeedback,getFeedbackById,getFeedbacks}
+
+
+// @desc Assign a community report to a worker
+const assignReport = async (req, res) => {
+  try {
+    const { workerId, authorityId } = req.body;
+
+    const report = await CommunityReport.findById(req.params.id);
+    if (!report) return res.status(404).json({ message: "Report not found" });
+
+    report.assignedTo = workerId;
+    report.assignedBy = authorityId;
+    report.assignedAt = new Date();
+    report.status = "in_progress";
+
+    await report.save();
+
+    res.json({ message: "Report assigned successfully", report });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports =  {assignReport, deleteFeedback,createFeedback,updateFeedback,getFeedbackById,getFeedbacks}
