@@ -4,8 +4,9 @@ const connectDB = require("./db/db"); // import the db.js file
 const userRoutes = require("./routes/userRoutes");
 const wokerRoutes = require('./routes/workerRoutes')
 const communityReportRoutes =  require("./routes/communityReportRoutes.js");
-const dotenv =  require("dotenv");
 const feedbackRoutes =  require("./routes/feedbackRoutes.js");
+const AuthorityRoute = require('./routes/authorityAuth.js')
+const dotenv =  require("dotenv");
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -34,3 +35,4 @@ app.use("/api/auth", userRoutes);
 app.use("/api/auth/worker", wokerRoutes);
 app.use("/api/reports", communityReportRoutes);
 app.use("/api/worker/feedback", feedbackRoutes);
+app.use('/api/auth/authority',AuthorityRoute)
