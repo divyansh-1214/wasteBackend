@@ -25,7 +25,10 @@ const communityReportSchema = new mongoose.Schema({
   reportedBy: { type: String, required: true },
   imageUrl: { type: String, require },
   priority: { type: String, enum: ["low", "medium", "high"], default: "low" },
-  assignedTo: { type: String, default: null }, // workerId or worker name
+  assignedTo: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Worker',
+  }, // workerId or worker name
   assignedBy: { type: String, default: null }, // authority ID
   assignedAt: { type: Date },
 });

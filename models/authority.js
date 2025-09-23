@@ -2,11 +2,22 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
-const authoritySchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
-}, { timestamps: true });
+const authoritySchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    aadhar: { type: String, required: true, unique: true },
+    address: { type: String, required: true },
+    phoneNumber: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    workerType: { 
+      type: String, 
+      required: true,
+      enum: ['superviser', 'Zone_Head', 'BranchHead', 'maintenance', ]
+    },
+  },
+  { timestamps: true }
+);
 
 // hash password before save
 authoritySchema.pre("save", async function (next) {
@@ -22,4 +33,4 @@ authoritySchema.methods.matchPassword = async function (enteredPassword) {
 };
 
 const Authority = mongoose.model("Authority", authoritySchema);
-module.exports=  Authority;
+module.exports = Authority;

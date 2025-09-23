@@ -6,6 +6,7 @@ const wokerRoutes = require('./routes/workerRoutes')
 const communityReportRoutes =  require("./routes/communityReportRoutes.js");
 const feedbackRoutes =  require("./routes/feedbackRoutes.js");
 const AuthorityRoute = require('./routes/authorityAuth.js')
+const Module = require("./routes/modulesRouter.js")
 const dotenv =  require("dotenv");
 dotenv.config();
 const app = express();
@@ -15,7 +16,7 @@ connectDB();
 
 // Middleware
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: process.env.FRONT_END_PORT,
   credentials: true
 }));
 app.use(express.json());
@@ -26,9 +27,9 @@ app.get("/", (req, res) => {
 });
 
 // Start Server
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Server running on http://localhost:${PORT}`);
+// });
 
 
 app.use("/api/auth", userRoutes);
@@ -36,3 +37,7 @@ app.use("/api/auth/worker", wokerRoutes);
 app.use("/api/reports", communityReportRoutes);
 app.use("/api/worker/feedback", feedbackRoutes);
 app.use('/api/auth/authority',AuthorityRoute)
+app.use('/api/modules', Module)
+
+
+module.exports=app;
