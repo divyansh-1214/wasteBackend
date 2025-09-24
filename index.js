@@ -39,9 +39,9 @@ app.use('/api/modules', Module);
 app.use('/api/training', modulesRoutes);
 
 // Test Route
-app.get("/", (req, res) => {
-  res.send("API is running and MongoDB is connected 🚀");
-});
+// app.get("/", (req, res) => {
+//   res.send("API is running and MongoDB is connected 🚀");
+// });
 
 // Start Server
 app.listen(PORT, () => {
