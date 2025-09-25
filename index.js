@@ -24,7 +24,11 @@ app.use(express.json());
 
 // Middleware
 app.use(cors({
-  origin: process.env.FRONT_END_PORT || "http://localhost:3000",
+  origin: [
+    process.env.FRONT_END_PORT || "http://localhost:3000",
+    "http://localhost:3000",
+    "http://poet3.example.com"
+  ],
   credentials: true
 }));
 app.use(express.json());
@@ -39,13 +43,13 @@ app.use('/api/modules', Module);
 app.use('/api/training', modulesRoutes);
 
 // Test Route
-// app.get("/", (req, res) => {
-//   res.send("API is running and MongoDB is connected 🚀");
-// });
+app.get("/", (req, res) => {
+  res.send("API is running and MongoDB is connected 🚀");
+});
 
 // Start Server
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Server running on http://localhost:${PORT}`);
+// });
 
 module.exports = app;
