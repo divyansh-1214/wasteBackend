@@ -26,8 +26,6 @@ app.use(express.json());
 app.use(cors({
   origin: [
     process.env.FRONT_END_PORT || "http://localhost:3000",
-    "http://localhost:3000",
-    "http://poet3.example.com"
   ],
   credentials: true
 }));
