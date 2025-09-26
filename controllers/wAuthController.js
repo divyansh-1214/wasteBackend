@@ -46,4 +46,15 @@ exports.getById = async (req, res) => {
         res.status(500).json({ error: 'Error fetching user' });
     }
 }
+exports.get = async (req, res) => {
+    try {
+        const user = await Worker.find();
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        res.status(200).json(user);
+    } catch (err) {
+        res.status(500).json({ error: 'Error fetching user' });
+    }
+}
 // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZDA2MWE1MzRkOTI3MTMzZDg1MGEzMCIsImlhdCI6MTc1ODQ4Nzc5MywiZXhwIjoxNzU4NTc0MTkzfQ.GTPyFpHMblU3sv79Kpt78DKN14JbKpc7IY0hg2ywNcQ
