@@ -10,9 +10,10 @@ const WorkerSchema = new mongoose.Schema({
   workerType: { 
     type: String, 
     required: true,
-    enum: ['garbage_collector', 'sweeper', 'recycling_worker', 'supervisor', 'maintenance', 'driver', 'other']
+    enum: ['garbage_collector', 'sweeper', 'recycling_worker', 'supervisor', 'maintenance', 'driver', 'other',"ward_head"]
   },
   email: { type: String, required: true, unique: true },
+  zone: { type: String, },
 });
 
 WorkerSchema.pre('save', async function(next) {
